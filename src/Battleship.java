@@ -43,26 +43,32 @@ public class Battleship {
 				col = 9;}
 			if (letter == "J" || letter == "j"){
 				col = 10;}
+		if(col <1 && col>10) {
+			System.out.println("That is not in the range.");
+			System.exit(0);}
 		 return col;
 	 }
 	 
-	 private static void hit(int board[][], int r, int c) {
+	 private static void hit(int board[][], int r, int c) { //10 for hit and ones place tells which ship
 		 if (board[c][r] == 5) { 
-				System.out.println ("Hit the Carrier (5 spaces)!");				
-			}else if(radar[c][r] == 4) {
+				System.out.println ("Hit the Carrier (5 spaces)!");		
+				board[c][r] = 15;
+			}else if(board[c][r] == 4) {
 				System.out.println ("Hit the Battleship (4 spaces)!");
-			}else if(radar[c][r] == 3) {
+				board[c][r] = 14;
+			}else if(board[c][r] == 3) {
 				System.out.println ("Hit the Cruiser (3 spaces)!");
-			}else if(radar[c][r] == 2) {
+				board[c][r] = 13;
+			}else if(board[c][r] == 2) {
 				System.out.println ("Hit the Submarine (3 spaces)!");
-			}else if(radar[c][r] == 1) {
+				board[c][r] = 12;
+			}else if(board[c][r] == 1) {
 				System.out.println ("Hit the Destroyer (2 spaces)!");
+				board[c][r] = 11;
 			}else {
 				System.out.println("Miss.");
+				board[c][r] = 10; // 10 for miss
 			}
-		 if(c <1 && c>10) {
-				System.out.println("That is not in the range.");
-				System.exit(0);}
 	 }
 
 
@@ -72,6 +78,7 @@ public class Battleship {
 		int player2 =2;
 		int turn;
 		boolean alive = true;
+		boolean empty = false;
 		turn = getTurn(player1, player2); //get turn (1 for p1 2 for p2)
 		
 		int column = 0;
@@ -81,9 +88,9 @@ public class Battleship {
 			
 			
 			Scanner shoot = new Scanner(System.in);
-			if (turn ==1) { //IF IT'S PLAYER 1'S TURN
+			while (turn ==1) { //IF IT'S PLAYER 1'S TURN
 				
-				
+				while (empty = false) {
 				//ask which num they want to hit, store as 'row' int
 				shoot = new Scanner(System.in);
 				try {
@@ -107,21 +114,97 @@ public class Battleship {
 					System.err.print(e);}
 				column = stringtoint(letter); //making column into int 1-10
 				
-				
-				System.out.println("You attack " + letter+row + ".");
+				if (radar[column][row] >9 &&radar[column][row] <16) {
+					System.out.println("You already attacked " + letter+row + ".");
+					if (radar[column][row] == 15) { 
+						System.out.println ("You had hit the Carrier (5 spaces).");	
+						
+					}else if (radar[column][row] == 14) {
+						System.out.println ("You had hit the Battleship (4 spaces)!");
+						
+					}else if(radar[column][row] == 13) {
+						System.out.println ("You had hit the Cruiser (3 spaces)!");
+						
+					}else if(radar[column][row] == 12) {
+						System.out.println ("You had hit the Submarine (3 spaces)!");
+						
+					}else if(radar[column][row] == 11) {
+						System.out.println ("You had hit the Destroyer (2 spaces)!");
+						
+					}else if(radar[column][row] == 10){
+						System.out.println("You had missed.");
+					}
+					empty = false;
+					
+				}else {
+					empty = true;
+				}
+				System.out.println("You attack " + letter+row + "."); }
 				
 				hit(radar, row, column);
 				
+				turn = 2;
 				
-				
-				//check if ship populates that slot
-				//return miss or hit, if hit, tell which ship
-				//*****STORE WHERE HAS ALREADY SHOT TO PREVENT REPEATS
-				//switch turn & repeat
-					
 				}
 				
+			while (turn ==2) { //IF IT'S PLAYER 2'S TURN
 				
+				while (empty = false) {
+				//ask which num they want to hit, store as 'row' int
+				shoot = new Scanner(System.in);
+				try {
+					System.out.println("Which row would you like to hit? (#s 1-10)");
+					row = shoot.nextInt();
+				}catch(Exception e) {
+					System.err.print(e);}
+				
+				if(row <1 && row>10) {
+					System.out.println("That is not in the range.");
+					System.exit(0);
+				}
+				
+				//ask which col to hit, store as int #1-10 as 'letter'
+				String letter = "";
+				shoot = new Scanner(System.in);
+				try {
+					System.out.println("Which column would you like to hit? (Letters A-J)");
+					letter = shoot.toString();
+				}catch(Exception e) {
+					System.err.print(e);}
+				column = stringtoint(letter); //making column into int 1-10
+				
+				if (ocean[column][row] >9 &&ocean[column][row] <16) {
+					System.out.println("You already attacked " + letter+row + ".");
+					if (ocean[column][row] == 15) { 
+						System.out.println ("You had hit the Carrier (5 spaces).");	
+						
+					}else if (ocean[column][row] == 14) {
+						System.out.println ("You had hit the Battleship (4 spaces)!");
+						
+					}else if(ocean[column][row] == 13) {
+						System.out.println ("You had hit the Cruiser (3 spaces)!");
+						
+					}else if(ocean[column][row] == 12) {
+						System.out.println ("You had hit the Submarine (3 spaces)!");
+						
+					}else if(ocean[column][row] == 11) {
+						System.out.println ("You had hit the Destroyer (2 spaces)!");
+						
+					}else if(ocean[column][row] == 10){
+						System.out.println("You had missed.");
+					}
+					empty = false;
+					
+				}else {
+					empty = true;
+				}
+				System.out.println("You attack " + letter+row + "."); }
+				
+				hit(ocean, row, column);
+				
+				turn = 1;
+				
+				}
 				
 			}
 		}
