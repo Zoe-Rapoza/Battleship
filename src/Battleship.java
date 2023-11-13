@@ -1,6 +1,6 @@
+
 import java.util.Random;
 import java.util.Scanner;
-
 public class Battleship {
 	
 	private static int[][] ocean; //p1's ocean AND p2's radar
@@ -45,6 +45,22 @@ public class Battleship {
 				col = 10;}
 		 return col;
 	 }
+	 
+	 private static void hit(int board[][], int r, int c) {
+		 if (board[c][r] == 5) { 
+				System.out.println ("Hit the Carrier (5 spaces)!");				
+			}else if(radar[c][r] == 4) {
+				System.out.println ("Hit the Battleship (4 spaces)!");
+			}else if(radar[c][r] == 3) {
+				System.out.println ("Hit the Cruiser (3 spaces)!");
+			}else if(radar[c][r] == 2) {
+				System.out.println ("Hit the Submarine (3 spaces)!");
+			}else if(radar[c][r] == 1) {
+				System.out.println ("Hit the Destroyer (2 spaces)!");
+			}else {
+				System.out.println("Miss.");
+			}
+	 }
 
 
 	public static void main(String[] args) {
@@ -86,18 +102,14 @@ public class Battleship {
 					letter = shoot.toString();
 				}catch(Exception e) {
 					System.err.print(e);}
-				column = stringtoint(letter);
+				column = stringtoint(letter); //making column into int 1-10
 				
 				
 				System.out.println("You attack " + letter+row + ".");
 				
+				hit(radar, row, column);
 				
-				//if LetNum doesn't contain a miss (0) then:
-				if (radar[column][row] != 0) { 
-					System.out.println ("Hit the ___!");				
-				}else {
-						System.out.println("Miss.");
-					}
+				
 				
 				//check if ship populates that slot
 				//return miss or hit, if hit, tell which ship
