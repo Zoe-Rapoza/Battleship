@@ -60,6 +60,9 @@ public class Battleship {
 			}else {
 				System.out.println("Miss.");
 			}
+		 if(c <1 && c>10) {
+				System.out.println("That is not in the range.");
+				System.exit(0);}
 	 }
 
 
