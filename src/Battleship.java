@@ -3,8 +3,8 @@ import java.util.Scanner;
 
 public class Battleship {
 	
-	private static int[][] ocean;
-	private static int[][] radar;
+	private static int[][] ocean; //p1's ocean AND p2's radar
+	private static int[][] radar; //opposite of ocean ^
 	
 	
 	private static int getTurn(int a, int b) {
@@ -60,11 +60,12 @@ public class Battleship {
 		
 		while (alive = true) {
 			
+			
 			Scanner shoot = new Scanner(System.in);
-			if (turn ==1) {
+			if (turn ==1) { //IF IT'S PLAYER 1'S TURN
 				
 				
-				//ask where to shoot
+				//ask which num they want to hit, store as 'row' int
 				shoot = new Scanner(System.in);
 				try {
 					System.out.println("Which row would you like to hit? (#s 1-10)");
@@ -72,6 +73,12 @@ public class Battleship {
 				}catch(Exception e) {
 					System.err.print(e);}
 				
+				if(row <1 && row>10) {
+					System.out.println("That is not in the range.");
+					System.exit(0);
+				}
+				
+				//ask which col to hit, store as int #1-10 as 'letter'
 				String letter = "";
 				shoot = new Scanner(System.in);
 				try {
@@ -80,10 +87,17 @@ public class Battleship {
 				}catch(Exception e) {
 					System.err.print(e);}
 				column = stringtoint(letter);
-				System.out.println(letter+row);
-				if (ocean[column][row] != 0) {
-					System.out.println ("Player "+ turn + " has hit the "+ ocean[column][row]);
-				}
+				
+				
+				System.out.println("You attack " + letter+row + ".");
+				
+				
+				//if LetNum doesn't contain a miss (0) then:
+				if (radar[column][row] != 0) { 
+					System.out.println ("Hit the ___!");				
+				}else {
+						System.out.println("Miss.");
+					}
 				
 				//check if ship populates that slot
 				//return miss or hit, if hit, tell which ship
