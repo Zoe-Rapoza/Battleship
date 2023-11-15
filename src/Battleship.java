@@ -1,5 +1,12 @@
 
 import java.util.Random;
+//In this section: 
+//WHILE ALIVE = TRUE
+//Randomizes turn between players 1 and 2
+//Asks players where on the grid they would like to shoot
+//Sees if it was already hit and tells them what they hit, if so sends them back to choose again
+//if not yet hit, lets them shoot and tells them what it was
+//stores the hit for future reference
 import java.util.Scanner;
 public class Battleship {
 	
