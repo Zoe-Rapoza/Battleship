@@ -73,7 +73,8 @@ public class Battleship {
 
 
 	public static void main(String[] args) {
-		ocean = Ships.shipSetup(); //kaitlin's branch should populate array
+		ocean = Ships.oceanSetup(); //kaitlin's branch should populate array
+		radar = Ships.radarSetup(); //kaitlin's branch should populate array
 		int player1 =1;
 		int player2 =2;
 		int turn;
