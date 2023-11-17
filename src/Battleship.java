@@ -185,6 +185,7 @@ public class Battleship {
 				
 				hit(radar, row, column, turn);
 				
+				empty = false;
 				turn = 2;
 				
 				}
@@ -244,12 +245,14 @@ public class Battleship {
 				
 				hit(ocean, row, column,turn);
 				
+				empty = false;
 				turn = 1;
 				
 				}
 				
-			}
-		}
+			}//while alive = true
+		
+	}//end main func
 
 	
 		
