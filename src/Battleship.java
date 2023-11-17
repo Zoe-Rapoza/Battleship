@@ -32,13 +32,6 @@ public class Battleship {
 	public static int cru2;
 	public static int sub2;
 	public static int dest2;
-		
-	 private static String ship(int shipNum){
-		String Ship = "";
-		
-		 return Ship;
-		
-	 }
 	 
 	 private static int stringtoint(String letter) {
 		 int col=0;
@@ -131,6 +124,7 @@ public class Battleship {
 			
 			Scanner shoot = new Scanner(System.in);
 			while (turn ==1) { //IF IT'S PLAYER 1'S TURN
+				empty = false;
 				
 				while (empty = false) {
 				//ask which num they want to hit, store as 'row' int
@@ -185,12 +179,12 @@ public class Battleship {
 				
 				hit(radar, row, column, turn);
 				
-				empty = false;
 				turn = 2;
 				
 				}
 				
 			while (turn ==2) { //IF IT'S PLAYER 2'S TURN
+				empty = false;
 				
 				while (empty = false) {
 				//ask which num they want to hit, store as 'row' int
@@ -245,7 +239,6 @@ public class Battleship {
 				
 				hit(ocean, row, column,turn);
 				
-				empty = false;
 				turn = 1;
 				
 				}
