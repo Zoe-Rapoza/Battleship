@@ -20,6 +20,18 @@ public class Battleship {
 		return rand.nextInt();
 		
 	}
+	
+	public static int car1;
+	public static int battle1;
+	public static int cru1;
+	public static int sub1;
+	public static int dest1;	
+	
+	public static int car2;
+	public static int battle2;
+	public static int cru2;
+	public static int sub2;
+	public static int dest2;
 		
 	 private static String ship(int shipNum){
 		String Ship = "";
@@ -56,22 +68,42 @@ public class Battleship {
 		 return col;
 	 }
 	 
-	 private static void hit(int board[][], int r, int c) { //10 for hit and ones place tells which ship
+	 private static void hit(int board[][], int r, int c, int turn) { //10 for hit and ones place tells which ship
 		 if (board[c][r] == 5) { 
 				System.out.println ("Hit the Carrier (5 spaces)!");		
 				board[c][r] = 15;
+				if (turn ==1) {
+				car1=car1+1;}
+				if (turn ==2) {
+					car2=car2+1;}
 			}else if(board[c][r] == 4) {
 				System.out.println ("Hit the Battleship (4 spaces)!");
 				board[c][r] = 14;
+				if (turn ==1) {
+					battle1 = battle1+1;}
+				if (turn ==2) {
+					battle2 = battle2+1;}
 			}else if(board[c][r] == 3) {
 				System.out.println ("Hit the Cruiser (3 spaces)!");
 				board[c][r] = 13;
+				if (turn ==1) {
+					cru1 = cru1+1;}
+				if (turn ==2) {
+					cru2 = cru2+1;}
 			}else if(board[c][r] == 2) {
 				System.out.println ("Hit the Submarine (3 spaces)!");
 				board[c][r] = 12;
+				if (turn ==1) {
+					sub1 =sub1+1;}
+				if (turn ==2) {
+					sub2 =sub2+1;}
 			}else if(board[c][r] == 1) {
 				System.out.println ("Hit the Destroyer (2 spaces)!");
 				board[c][r] = 11;
+				if (turn ==1) {
+					dest1=dest1+1;}
+				if (turn ==2) {
+					dest2=dest2+1;}
 			}else {
 				System.out.println("Miss.");
 				board[c][r] = 10; // 10 for miss
@@ -87,6 +119,8 @@ public class Battleship {
 		int turn;
 		boolean alive = true;
 		boolean empty = false;
+		
+		
 		turn = getTurn(player1, player2); //get turn (1 for p1 2 for p2)
 		
 		int column = 0;
@@ -149,7 +183,7 @@ public class Battleship {
 				}
 				System.out.println("You attack " + letter+row + "."); }
 				
-				hit(radar, row, column);
+				hit(radar, row, column, turn);
 				
 				turn = 2;
 				
@@ -208,7 +242,7 @@ public class Battleship {
 				}
 				System.out.println("You attack " + letter+row + "."); }
 				
-				hit(ocean, row, column);
+				hit(ocean, row, column,turn);
 				
 				turn = 1;
 				
