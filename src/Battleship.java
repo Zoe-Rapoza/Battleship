@@ -32,6 +32,7 @@ public class Battleship {
 	public static int cru2;
 	public static int sub2;
 	public static int dest2;
+	
 	 
 	 private static int stringtoint(String letter) {
 		 int col=0;
@@ -107,14 +108,12 @@ public class Battleship {
 	public static void main(String[] args) {
 		ocean = Ships.oceanSetup(); //kaitlin's branch should populate array
 		radar = Ships.radarSetup(); //kaitlin's branch should populate array
-		int player1 =1;
-		int player2 =2;
 		int turn;
 		boolean alive = true;
 		boolean empty = false;
 		
 		
-		turn = getTurn(player1, player2); //get turn (1 for p1 2 for p2)
+		turn = getTurn(1, 2); //get turn (1 for p1 2 for p2)
 		
 		int column = 0;
 		int row =0;
@@ -241,7 +240,7 @@ public class Battleship {
 				
 				turn = 1;
 				
-				}
+				}//while turn =2
 				
 			}//while alive = true
 		
@@ -253,11 +252,6 @@ public class Battleship {
 		
 		
 		
-		
-		
-		
-		
-		
 
-	}
+} //end class
 
