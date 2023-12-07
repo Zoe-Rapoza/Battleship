@@ -138,6 +138,24 @@ public class Battleship {
 				empty = true;
 			}
 	 }
+	 
+	 private static boolean stillAlive(int turn, boolean alive) {
+		 if (car1==5 && battle1==4 && cru1 ==3&& sub1==3 && dest1==2 ||car2==5 && battle2==4 && cru2 ==3&& sub2==3 && dest2==2) {
+				alive = false;
+				if (turn ==1) {
+					System.out.println("Player 2 is dead!");
+				}
+				if (turn ==2) {
+					System.out.println("Player 1 is dead!");
+				}
+				System.out.println("Congratulations to player  " +turn+ "!");
+				System.exit(0);
+				}else {
+					alive = true;	
+				}
+
+		 return alive;
+	 }
 
 
 	public static void main(String[] args) {
@@ -207,6 +225,9 @@ public class Battleship {
 					if (turn ==2) {
 						hit(ocean, row, column, turn);
 				}
+					
+			alive = stillAlive(turn, alive);
+			
 				
 				if (turn ==1) {
 					turn =2;
