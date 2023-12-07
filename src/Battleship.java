@@ -37,10 +37,19 @@ public class Battleship {
 	public static int dest2;
 	
 	 
-	 private static int stringtoint(String letter) {
-		 int col=0;
+	 private static int getCol(String letter, int col) {
 		 boolean valid = false;
-		 while( valid = false) {
+		 
+		//ask which col to hit, store as int #1-10 as 'letter'
+		 Scanner shoot = new Scanner(System.in);
+			shoot = new Scanner(System.in);
+			while( valid = false) {
+			try {
+				System.out.println("Which column would you like to hit? (Letters A-J)");
+				letter = shoot.toString();
+			}catch(Exception e) {
+				System.err.print(e);}
+			
 		 if (letter == "A" || letter == "a"){
 				col = 1;}
 			if (letter == "B" || letter == "b"){
@@ -61,11 +70,12 @@ public class Battleship {
 				col = 9;}
 			if (letter == "J" || letter == "j"){
 				col = 10;}
-		if(col <1 && col>10) {
+			else {
 			System.out.println("That is not in the range. Pick again.");
-			}else {
-				valid = true;
-			} }
+			} 
+				
+			valid = true;
+			}
 		 return col;}
 	 
 
@@ -178,8 +188,7 @@ public class Battleship {
 				
 			while (empty = false) {
 			//ask which num they want to hit, store as 'row' int
-				
-					
+
 					
 					
 				shoot = new Scanner(System.in);
@@ -194,16 +203,7 @@ public class Battleship {
 				System.exit(0);
 			}
 				
-				//ask which col to hit, store as int #1-10 as 'letter'
-				
-				shoot = new Scanner(System.in);
-				try {
-					System.out.println("Which column would you like to hit? (Letters A-J)");
-					letter = shoot.toString();
-				}catch(Exception e) {
-					System.err.print(e);}
-				column = stringtoint(letter); //making column into int 1-10
-				
+			column = getCol(letter,column);
 				
 				
 				
