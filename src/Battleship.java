@@ -39,6 +39,8 @@ public class Battleship {
 	 
 	 private static int stringtoint(String letter) {
 		 int col=0;
+		 boolean valid = false;
+		 while( valid = false) {
 		 if (letter == "A" || letter == "a"){
 				col = 1;}
 			if (letter == "B" || letter == "b"){
@@ -60,12 +62,14 @@ public class Battleship {
 			if (letter == "J" || letter == "j"){
 				col = 10;}
 		if(col <1 && col>10) {
-			System.out.println("That is not in the range.");
-			System.exit(0);}
-		 return col;
-	 }
+			System.out.println("That is not in the range. Pick again.");
+			}else {
+				valid = true;
+			} }
+		 return col;}
 	 
-	 private static void hit(int board[][], int r, int c, int turn) { //10 for hit and ones place tells which ship
+
+	private static void hit(int board[][], int r, int c, int turn) { //10 for hit and ones place tells which ship
 		 if (board[c][r] == 5) { 
 				System.out.println ("Hit the Carrier (5 spaces)!");		
 				board[c][r] = 15;
@@ -195,10 +199,14 @@ public class Battleship {
 			}
 			
 				
-				
 				System.out.println("You attack " + letter+row + ".");
 				
-				hit(radar, row, column, turn);
+				if (turn ==1) {
+					hit(radar, row, column, turn);
+					}
+					if (turn ==2) {
+						hit(ocean, row, column, turn);
+				}
 				
 				if (turn ==1) {
 					turn =2;
