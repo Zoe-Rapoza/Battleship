@@ -8,10 +8,11 @@ import java.util.Random;
 //if not yet hit, lets them shoot and tells them what it was
 //stores the hit for future reference
 import java.util.Scanner;
+
 public class Battleship {
 	
-	public static int[][] ocean; //p1's ocean AND p2's radar
-	public static int[][] radar; //opposite of ocean ^
+	static int[][] ocean = new int[10][10];
+	static int[][] radar = new int [10][10];
 	
 	public static int turn; 
 	static String letter = "";
