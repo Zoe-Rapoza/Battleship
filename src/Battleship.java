@@ -11,8 +11,8 @@ import java.util.Scanner;
 
 public class Battleship {
 	
-	static int[][] ocean = new int[10][10];
-	static int[][] radar = new int [10][10];
+	static String[][] ocean = new String[10][10];
+	static String[][] radar = new String [10][10];
 	
 	public static int turn; 
 	static String letter = "";
@@ -25,17 +25,17 @@ public class Battleship {
 		
 	}
 	
-	public static int car1;
-	public static int battle1;
-	public static int cru1;
-	public static int sub1;
-	public static int dest1;	
+	//public static int car1;
+	//public static int battle1;
+	//public static int cru1;
+	//public static int sub1;
+	//public static int dest1;	
 	
-	public static int car2;
-	public static int battle2;
-	public static int cru2;
-	public static int sub2;
-	public static int dest2;
+	//public static int car2;
+	//public static int battle2;
+	//public static int cru2;
+	//public static int sub2;
+	//public static int dest2;
 	
 	 
 	 private static int getCol(String letter, int col) {
@@ -80,67 +80,55 @@ public class Battleship {
 		 return col;}
 	 
 
-	private static void hit(int board[][], int r, int c, int turn) { //10 for hit and ones place tells which ship
-		 if (board[c][r] == 5) { 
+	private static void hit(String board[][], int r, int c, int turn) { //10 for hit and ones place tells which ship
+		 if (board[c][r] == "A") { 
 				System.out.println ("Hit the Carrier (5 spaces)!");		
-				board[c][r] = 15;
+				board[c][r] = "H";
 				if (turn ==1) {
-				car1=car1+1;}
+				Ships.car.hit++;}
 				if (turn ==2) {
-					car2=car2+1;}
-			}else if(board[c][r] == 4) {
+					Ships.carrier.hit++;}
+			}else if(board[c][r] == "B") {
 				System.out.println ("Hit the Battleship (4 spaces)!");
-				board[c][r] = 14;
+				board[c][r] = "H";
 				if (turn ==1) {
-					battle1 = battle1+1;}
+					Ships.bat.hit++;}
 				if (turn ==2) {
-					battle2 = battle2+1;}
-			}else if(board[c][r] == 3) {
+					Ships.battle.hit++;}
+			}else if(board[c][r] == "C") {
 				System.out.println ("Hit the Cruiser (3 spaces)!");
-				board[c][r] = 13;
+				board[c][r] = "H";				
 				if (turn ==1) {
-					cru1 = cru1+1;}
+					Ships.cru.hit++;}
 				if (turn ==2) {
-					cru2 = cru2+1;}
-			}else if(board[c][r] == 2) {
+					Ships.cruiser.hit++;}
+			}else if(board[c][r] == "S") {
 				System.out.println ("Hit the Submarine (3 spaces)!");
-				board[c][r] = 12;
+				board[c][r] = "H";
 				if (turn ==1) {
-					sub1 =sub1+1;}
+					Ships.sub.hit++;}
 				if (turn ==2) {
-					sub2 =sub2+1;}
-			}else if(board[c][r] == 1) {
+					Ships.submarine.hit++;}
+			}else if(board[c][r] == "D") {
 				System.out.println ("Hit the Destroyer (2 spaces)!");
-				board[c][r] = 11;
+				board[c][r] = "H";
 				if (turn ==1) {
-					dest1=dest1+1;}
+					Ships.dest.hit++;}
 				if (turn ==2) {
-					dest2=dest2+1;}
+					Ships.destroyer.hit++;}
 			}else {
 				System.out.println("Miss.");
-				board[c][r] = 10; // 10 for miss
+				board[c][r] = "M" ;
 			}
 	 }
 	 
-	 private static void ifPrevHit(int column, int row, boolean empty, int[][] board) {
-		 if (board[column][row] >9 &&radar[column][row] <16) {
+	 private static void ifPrevHit(int column, int row, boolean empty, String[][] board) {
+		 if (board[column][row] == "M" || radar[column][row] == "H") {
 				System.out.println("You already attacked " + letter+row + ".");
-				if (board[column][row] == 15) { 
-					System.out.println (letter+row + " held the enemy Carrier (5 spaces)!");	
+				if (board[column][row] == "H") { 
+					System.out.println (letter+row + " held an enemy ship.");	
 					
-				}else if (board[column][row] == 14) {
-					System.out.println (letter+row + " held the enemy Battleship (4 spaces)!");
-					
-				}else if(board[column][row] == 13) {
-					System.out.println (letter+row + " held the enemy Cruiser (3 spaces)!");
-					
-				}else if(board[column][row] == 12) {
-					System.out.println (letter+row + " held the enemy Submarine (3 spaces)!");
-					
-				}else if(board[column][row] == 11) {
-					System.out.println (letter+row + " held the enemy Destroyer (2 spaces)!");
-					
-				}else if(board[column][row] == 10){
+				}else if (board[column][row] == "M"){
 					System.out.println("You had missed.");
 				}
 				empty = false;
@@ -151,17 +139,18 @@ public class Battleship {
 	 }
 	 
 	 private static boolean stillAlive(int turn, boolean alive) {
-		 if (car1==5 && battle1==4 && cru1 ==3&& sub1==3 && dest1==2 ||car2==5 && battle2==4 && cru2 ==3&& sub2==3 && dest2==2) {
+		 if (Ships.car.hit == Ships.car.size && Ships.bat.hit == Ships.bat.size && Ships.cru.hit ==Ships.cru.size&& Ships.sub.hit==Ships.sub.size && Ships.dest.hit==Ships.dest.size) {
 				alive = false;
-				if (turn ==1) {
-					System.out.println("Player 2 is dead!");
-				}
-				if (turn ==2) {
-					System.out.println("Player 1 is dead!");
-				}
-				System.out.println("Congratulations to player  " +turn+ "!");
+				System.out.println("Player 1 is dead!");
+				System.out.println("Congratulations to player 2!");
 				System.exit(0);
-				}else {
+		 } if (Ships.carrier.hit == Ships.carrier.size && Ships.battle.hit == Ships.battle.size && Ships.cruiser.hit ==Ships.cruiser.size&& Ships.submarine.hit==Ships.submarine.size && Ships.destroyer.hit==Ships.destroyer.size) {
+				alive = false;
+				System.out.println("Player 2 is dead!");
+				System.out.println("Congratulations to player 1!");
+				System.exit(0);
+		 }
+				else {
 					alive = true;	
 				}
 
